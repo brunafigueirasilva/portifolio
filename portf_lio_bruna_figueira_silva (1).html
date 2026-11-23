@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080c14">
+<meta name="author" content="Bruna Figueira Silva">
+<meta name="description" content="Portfólio de Bruna Figueira Silva — Técnica em Desenvolvimento de Sistemas e Desenvolvedora Back-end disponível para estágio. Estudo de caso completo e simulação ao vivo do AgriFarm.">
+
+<!-- Open Graph / Compartilhamento LinkedIn & Redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Bruna Figueira Silva — Desenvolvedora Back-end">
+<meta property="og:description" content="Técnica em Desenvolvimento de Sistemas disponível para estágio. Projetos em PHP, Laravel 12, MySQL e estudo de caso completo do AgriFarm.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bruna Figueira Silva — Desenvolvedora Back-end">
+<meta name="twitter:description" content="Técnica em Desenvolvimento de Sistemas disponível para estágio. Projetos em PHP, Laravel 12, MySQL e estudo de caso completo do AgriFarm.">
+
+<!-- Favicon SVG Personalizado </> -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230e1524'/%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23a855f7' stroke-opacity='0.45' stroke-width='2'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='25' fill='%23c084fc'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+
+<title>Bruna Figueira Silva — Desenvolvedora Back-end</title>
+
+<!-- Google Fonts: Space Grotesk, Plus Jakarta Sans & DM Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome 6.5.2 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ==========================================================================
+   TOKENS DE DESIGN & CONFIGURAÇÃO GLOBAL
+   ========================================================================== */
+:root {
+  --bg: #080c14;
+  --bg-elevated: #0e1524;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.075);
+  --border: rgba(148, 163, 184, 0.14);
+  --border-accent: rgba(168, 85, 247, 0.42);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #a855f7;
+  --accent-light: #c084fc;
+  --accent-glow: rgba(168, 85, 247, 0.32);
+  --blue: #38bdf8;
+  --green: #22c55e;
+  --green-soft: #4ade80;
+  --amber: #f59e0b;
+  --light-bg: #f4f7fb;
+  --light-card: #ffffff;
+  --light-text: #0f172a;
+  --light-muted: #475569;
+  --light-border: #e2e8f0;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --max: 1140px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grade Arquitetural Sutil + Brilhos Ambientais */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 74% 22%, rgba(168, 85, 247, 0.18), transparent 46%),
+    radial-gradient(circle at 18% 55%, rgba(56, 189, 248, 0.09), transparent 40%),
+    radial-gradient(circle at 80% 85%, rgba(34, 197, 94, 0.08), transparent 45%);
+}
+
+::selection { background: var(--accent); color: #fff; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.mono { font-family: 'DM Mono', monospace; }
+
+/* ==========================================================================
+   BARRA DE PROGRESSO DE ROLAGEM & NAVEGAÇÃO FLUTUANTE EM PÍLULA
+   ========================================================================== */
+#scrollProgress {
+  position: fixed;
+  top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--blue), var(--accent), var(--green-soft));
+  z-index: 2000;
+  transition: width 0.08s linear;
+}
+
+.floating-nav-wrap {
+  position: fixed;
+  top: 22px;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+.floating-nav {
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s var(--ease-out), background 0.3s, box-shadow 0.3s;
+}
+.floating-nav.scrolled {
+  background: rgba(10, 15, 28, 0.92);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.nav-pill-slider {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: 68px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.45s var(--ease-spring), width 0.45s var(--ease-spring), opacity 0.25s;
+  pointer-events: none;
+  z-index: 0;
+}
+.floating-nav a {
+  position: relative;
+  z-index: 1;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+  transition: color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+  white-space: nowrap;
+}
+.floating-nav a:hover { color: #fff; }
+.floating-nav a.active { color: #fff; }
+.floating-nav a.nav-cta-pill {
+  margin-left: 4px;
+  background: linear-gradient(135deg, #c084fc, #a855f7);
+  color: #090514;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.38);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+}
+.floating-nav a.nav-cta-pill:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 26px rgba(168, 85, 247, 0.55);
+}
+
+/* ==========================================================================
+   SEÇÃO HERO (2 COLUNAS + EMBLEMA </> + FAIXA DE 4 DESTAQUES)
+   ========================================================================== */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 112px;
+  padding-bottom: 56px;
+  position: relative;
+}
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.14fr 0.86fr;
+  align-items: center;
+  gap: 44px;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.hero-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(74, 222, 128, 0.36);
+  backdrop-filter: blur(12px);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #f1f5f9;
+  transition: border-color 0.3s, transform 0.3s var(--ease-out);
+}
+.status-pill:hover {
+  border-color: rgba(74, 222, 128, 0.65);
+  transform: translateY(-2px);
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  box-shadow: 0 0 12px var(--green-soft);
+  animation: pulseGlow 2.2s infinite;
+}
+.edu-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(192, 132, 252, 0.28);
+  font: 500 11.5px 'DM Mono', monospace;
+  color: #e9d5ff;
+}
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.55rem, 5vw, 4.35rem);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+.hero-title .line-white {
+  display: block;
+  color: #f8fafc;
+}
+.hero-title .line-accent {
+  display: inline-block;
+  margin-top: 6px;
+  background: linear-gradient(120deg, #c084fc 0%, #a855f7 45%, #38bdf8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textShimmer 6s ease infinite;
+}
+.hero-bio {
+  margin-top: 22px;
+  max-width: 585px;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #94a3b8;
+}
+.hero-bio strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 30px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-out), background 0.3s, border-color 0.3s;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.22) 50%, transparent 80%);
+  transform: translateX(-130%);
+  transition: transform 0.75s var(--ease-out);
+}
+.btn:hover::after { transform: translateX(130%); }
+.btn:hover { transform: translateY(-3px); }
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: linear-gradient(135deg, #9333ea, #7e22ce);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(147, 51, 234, 0.35);
+}
+.btn-primary:hover { box-shadow: 0 16px 42px rgba(147, 51, 234, 0.52); }
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(148, 163, 184, 0.22);
+  color: #e2e8f0;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(192, 132, 252, 0.5);
+}
+
+/* ==========================================================================
+   EMBLEMA INTERATIVO </> COM INCLINAÇÃO 3D E ÓRBITAS
+   ========================================================================== */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.code-emblem-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 440px;
+  min-height: 340px;
+  perspective: 1100px;
+}
+.emblem-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.34), rgba(56, 189, 248, 0.14), transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: pulseSlow 5s ease-in-out infinite;
+}
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(192, 132, 252, 0.28);
+  pointer-events: none;
+}
+.orbit-ring.outer {
+  width: 312px;
+  height: 312px;
+  animation: spinSlow 28s linear infinite;
+}
+.orbit-ring.inner {
+  width: 242px;
+  height: 242px;
+  border-style: solid;
+  border-color: rgba(56, 189, 248, 0.18);
+  animation: spinReverse 20s linear infinite;
+}
+.orbit-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: 0 0 14px var(--accent-light);
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.orbit-ring.inner .orbit-dot {
+  background: var(--blue);
+  box-shadow: 0 0 14px var(--blue);
+  top: auto;
+  bottom: -4px;
+}
+
+.code-core-box {
+  width: 196px;
+  height: 196px;
+  border-radius: 34px;
+  background: linear-gradient(145deg, rgba(22, 30, 50, 0.92), rgba(10, 14, 24, 0.96));
+  border: 1px solid rgba(192, 132, 252, 0.38);
+  box-shadow:
+    0 28px 65px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    0 0 40px rgba(168, 85, 247, 0.22);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.25s ease-out, box-shadow 0.4s var(--ease-out), border-color 0.3s;
+  animation: emblemFloat 5.5s ease-in-out infinite;
+}
+.code-core-box:hover {
+  animation-play-state: paused;
+  border-color: var(--accent-light);
+  box-shadow:
+    0 34px 75px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.28),
+    0 0 52px rgba(168, 85, 247, 0.42);
+}
+.code-symbol-big {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 3.85rem;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 15%, #c084fc 55%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 22px rgba(168, 85, 247, 0.35));
+  transition: transform 0.4s var(--ease-spring);
+}
+.code-core-box:hover .code-symbol-big {
+  transform: scale(1.08);
+}
+.code-core-sub {
+  margin-top: 10px;
+  font: 500 10px 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.floating-tech-pill {
+  position: absolute;
+  z-index: 3;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  backdrop-filter: blur(12px);
+  font: 500 11px 'DM Mono', monospace;
+  color: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s var(--ease-spring), border-color 0.3s;
+}
+.floating-tech-pill:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: var(--accent-light);
+}
+.ftp-1 { top: 24px; right: 12px; animation: badgeBob1 4.6s ease-in-out infinite; }
+.ftp-2 { bottom: 34px; left: 4px; animation: badgeBob2 5.2s ease-in-out infinite; }
+.ftp-3 { bottom: 22px; right: 18px; animation: badgeBob1 5.8s ease-in-out infinite; }
+
+/* Cabeçalhos de Seção */
+.section { padding: 92px 0; position: relative; }
+.section-header-center {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: 500 11.5px 'DM Mono', monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 14px;
+}
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  width: 22px;
+  height: 1.5px;
+  background: var(--accent-light);
+  opacity: 0.7;
+}
+.section-heading {
+  font: 700 clamp(2rem, 4.2vw, 3.1rem)/1.12 'Space Grotesk', sans-serif;
+  letter-spacing: -0.04em;
+  margin: 0 auto;
+}
+.section-sub {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 640px;
+  margin: 14px auto 0;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
+   01 / SOBRE & STACK
+   ========================================================================== */
+.about-stack-grid {
+  display: grid;
+  grid-template-columns: 0.96fr 1.04fr;
+  gap: 32px;
+  margin-top: 46px;
+  align-items: stretch;
+}
+.about-box {
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.35s, transform 0.4s var(--ease-out);
+}
+.about-box:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+}
+.about-box p {
+  color: #cbd5e1;
+  font-size: 14.8px;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.about-box strong { color: #fff; }
+
+.formation-box {
+  margin: 14px 0 22px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.formation-box i {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.18);
+  color: var(--accent-light);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.formation-box strong {
+  display: block;
+  font: 700 14px 'Space Grotesk', sans-serif;
+  color: #f8fafc;
+}
+.formation-box span {
+  display: block;
+  font-size: 12.5px;
+  color: #cbd5e1;
+  margin-top: 3px;
+  line-height: 1.55;
+}
+
+.pillars-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.pillar-item {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.3s var(--ease-spring), border-color 0.3s, background 0.3s;
+}
+.pillar-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(192, 132, 252, 0.45);
+  background: rgba(168, 85, 247, 0.08);
+}
+.pillar-item i { color: var(--accent-light); font-size: 16px; }
+.pillar-item span { font-size: 13px; font-weight: 600; color: #f1f5f9; }
+
+.stack-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.stack-card {
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.35s var(--ease-spring), border-color 0.35s, background 0.35s;
+}
+.stack-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(192, 132, 252, 0.45);
+  background: var(--surface-hover);
+}
+.stack-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.stack-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.16);
+  color: var(--accent-light);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+.stack-card h3 { font: 700 14.5px 'Space Grotesk', sans-serif; }
+.stack-card-desc {
+  font-size: 12.2px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip {
+  font: 500 11px 'DM Mono', monospace;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: #e2e8f0;
+  transition: transform 0.25s var(--ease-spring), border-color 0.25s, color 0.25s;
+}
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-light);
+  color: #fff;
+}
+
+/* ==========================================================================
+   02 / AGRIFARM — ESTUDO DE CASO COMPLETO
+   ========================================================================== */
+.agrifarm-deep-section { padding: 80px 0 70px; }
+.agrifarm-banner-card {
+  border-radius: 28px;
+  border: 1px solid rgba(74, 222, 128, 0.26);
+  background: linear-gradient(145deg, rgba(16, 42, 26, 0.55), rgba(8, 12, 20, 0.96));
+  padding: 42px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+.agrifarm-top-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+.agri-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.32);
+  color: var(--green-soft);
+  font: 500 11px 'DM Mono', monospace;
+}
+.agrifarm-top-row h3 {
+  font: 700 clamp(2rem, 3.8vw, 2.85rem) 'Space Grotesk', sans-serif;
+  letter-spacing: -0.04em;
+}
+.agrifarm-top-row h3 span { color: var(--green-soft); }
+.agrifarm-top-row p {
+  color: #cbd5e1;
+  max-width: 720px;
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+
+.agri-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+  margin-top: 12px;
+  text-align: left;
+}
+.agri-role-box {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(9, 14, 24, 0.72);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  transition: transform 0.3s var(--ease-spring), border-color 0.3s;
+}
+.agri-role-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--green-soft);
+}
+.agri-role-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.agri-role-head i {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(34, 197, 94, 0.14);
+  color: var(--green-soft);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+}
+.agri-role-head strong {
+  font: 700 14px 'Space Grotesk', sans-serif;
+  color: #f8fafc;
+}
+.agri-role-box p {
+  font-size: 12.8px;
+  color: #94a3b8;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.agri-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.btn-agri {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(22, 163, 74, 0.3);
+}
+.btn-agri:hover { box-shadow: 0 16px 40px rgba(22, 163, 74, 0.48); }
+
+/* Navegador Interativo de 6 Etapas */
+.stepper-container { margin-top: 32px; }
+.stepper-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.stepper-counter {
+  font: 500 12px 'DM Mono', monospace;
+  color: var(--green-soft);
+}
+.stepper-arrows { display: flex; gap: 8px; }
+.arrow-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: #e2e8f0;
+  font: 500 12px 'DM Mono', monospace;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+.arrow-btn:hover:not(:disabled) {
+  background: rgba(74, 222, 128, 0.14);
+  border-color: var(--green-soft);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.arrow-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.stepper-track {
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+.stepper-fill {
+  height: 100%;
+  width: 16.66%;
+  background: linear-gradient(90deg, #22c55e, #38bdf8);
+  border-radius: 99px;
+  transition: width 0.5s var(--ease-out);
+}
+
+.stepper-grid {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+  gap: 24px;
+}
+.step-tabs-col { display: flex; flex-direction: column; gap: 8px; }
+.step-btn {
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-spring);
+}
+.step-btn:hover {
+  background: rgba(74, 222, 128, 0.07);
+  border-color: rgba(74, 222, 128, 0.3);
+  transform: translateX(4px);
+}
+.step-btn.active {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(56, 189, 248, 0.08));
+  border-color: var(--green-soft);
+  transform: translateX(6px);
+}
+.step-idx {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  font: 700 11.5px 'DM Mono', monospace;
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.step-btn.active .step-idx {
+  background: var(--green-soft);
+  color: #052e16;
+}
+.step-btn-info strong {
+  display: block;
+  font: 700 13.5px 'Space Grotesk', sans-serif;
+  color: #f8fafc;
+}
+.step-btn-info small {
+  display: block;
+  font: 400 11px 'DM Mono', monospace;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.step-stage-card {
+  border-radius: 20px;
+  padding: 28px;
+  background: rgba(9, 14, 24, 0.85);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: opacity 0.28s var(--ease-out), transform 0.28s var(--ease-out);
+}
+.step-stage-card.fade-swap {
+  opacity: 0;
+  transform: translateY(10px) scale(0.99);
+}
+.stage-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 11px 'DM Mono', monospace;
+  color: var(--green-soft);
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  padding: 5px 11px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.step-stage-card h4 {
+  font: 700 20px/1.25 'Space Grotesk', sans-serif;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.step-stage-card p {
+  font-size: 14px;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.stage-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.stage-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.2px;
+  color: #e2e8f0;
+  line-height: 1.55;
+}
+.stage-list li i {
+  color: var(--green-soft);
+  margin-top: 4px;
+  font-size: 12px;
+}
+.stage-list code {
+  font-family: 'DM Mono', monospace;
+  font-size: 11.5px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #86efac;
+}
+
+/* Fluxo Visual da Etapa */
+.stage-flow-box {
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: #05080f;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.flow-node {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.26);
+  font: 500 11px 'DM Mono', monospace;
+  color: #bae6fd;
+}
+.flow-node:last-child {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(74, 222, 128, 0.35);
+  color: #bbf7d0;
+}
+.flow-arrow {
+  color: #64748b;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   03 / INTERAÇÃO AO VIVO (CARD DE ALTO CONTRASTE CLARO #f4f7fb)
+   ========================================================================== */
+.playground-wrapper {
+  padding: 20px 0 90px;
+}
+.light-showcase {
+  background: var(--light-bg);
+  color: var(--light-text);
+  border-radius: 34px;
+  padding: 50px 44px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  position: relative;
+  overflow: hidden;
+}
+.light-showcase-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.light-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font: 600 11px 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.light-showcase h2 {
+  font: 800 clamp(2rem, 4vw, 2.9rem)/1.08 'Space Grotesk', sans-serif;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+}
+.light-showcase .lead {
+  font-size: 15px;
+  color: var(--light-muted);
+  margin-top: 10px;
+  line-height: 1.75;
+}
+.reset-sim-btn {
+  margin-top: 16px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font: 600 12.5px 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s var(--ease-out);
+}
+.reset-sim-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+}
+
+.sim-grid {
+  display: grid;
+  grid-template-columns: 0.98fr 1.02fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Painel Esquerdo: Balança + Sensor de Distância + Saco & Vaca Animados */
+.scale-bay {
+  background: #e9eff6;
+  border-radius: 26px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid #dbe4ee;
+  position: relative;
+}
+
+.scale-machine {
+  background: #0d1522;
+  border-radius: 22px;
+  padding: 18px;
+  color: #f8fafc;
+  border: 2px solid #1e293b;
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.2);
+  transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s var(--ease-spring);
+}
+.scale-machine.drag-over {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.22), 0 25px 50px rgba(15, 23, 42, 0.3);
+  transform: scale(1.015);
+}
+.scale-machine.full-state {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.18), 0 25px 50px rgba(15, 23, 42, 0.26);
+}
+.scale-machine.eating-state {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.2), 0 25px 50px rgba(15, 23, 42, 0.26);
+}
+
+.scale-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 500 10.5px 'DM Mono', monospace;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+.scale-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.scale-machine.full-state .scale-led {
+  background: #22c55e;
+  box-shadow: 0 0 12px #22c55e;
+}
+.scale-machine.eating-state .scale-led {
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+}
+
+.dual-lcd-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.lcd-box {
+  background: #070b12;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.lcd-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 9.5px 'DM Mono', monospace;
+  color: #64748b;
+  text-transform: uppercase;
+}
+.lcd-val {
+  font: 700 22px/1.15 'DM Mono', monospace;
+  color: #f8fafc;
+  margin-top: 4px;
+  letter-spacing: -0.03em;
+}
+.lcd-val.dist-val { color: #38bdf8; }
+.lcd-foot {
+  display: block;
+  font: 500 10px 'DM Mono', monospace;
+  color: #94a3b8;
+  margin-top: 3px;
+}
+
+.scale-platform-zone {
+  margin-top: 14px;
+  height: 175px;
+  border-radius: 16px;
+  background: #090f19;
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.scale-machine.drag-over .scale-platform-zone {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.trough-assembly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.falling-grains {
+  position: absolute;
+  top: -76px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 82px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 3;
+}
+.falling-grains.active { opacity: 1; }
+.grain-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 8px #fde047;
+  animation: grainCascade 0.55s linear infinite;
+}
+.grain-dot:nth-child(1) { left: 22%; animation-delay: 0s; }
+.grain-dot:nth-child(2) { left: 42%; animation-delay: 0.14s; }
+.grain-dot:nth-child(3) { left: 60%; animation-delay: 0.28s; }
+.grain-dot:nth-child(4) { left: 75%; animation-delay: 0.08s; }
+.grain-dot:nth-child(5) { left: 32%; animation-delay: 0.36s; }
+.grain-dot:nth-child(6) { left: 52%; animation-delay: 0.22s; }
+
+.trough-bowl {
+  width: 170px;
+  height: 66px;
+  border-radius: 10px 10px 28px 28px;
+  border: 2px solid #334155;
+  background: #0f172a;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-spring);
+}
+.scale-machine.pressed .trough-bowl {
+  transform: translateY(5px) scaleX(1.02);
+}
+.feed-mound {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  right: -5%;
+  height: 20%;
+  border-radius: 50% 50% 0 0 / 26% 26% 0 0;
+  background: linear-gradient(180deg, #facc15 0%, #ca8a04 100%);
+  box-shadow: 0 -4px 16px rgba(250, 204, 21, 0.35);
+  transition: height 0.75s var(--ease-out);
+}
+.scale-base-bar {
+  width: 132px;
+  height: 8px;
+  border-radius: 99px;
+  background: #334155;
+  margin-top: 6px;
+  position: relative;
+}
+.scale-base-bar::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 6px;
+  background: #475569;
+  border-radius: 4px 4px 0 0;
+}
+
+.trough-side-sensor {
+  position: absolute;
+  right: -14px;
+  top: 12px;
+  background: #1e293b;
+  border: 1.5px solid #38bdf8;
+  border-radius: 8px;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  z-index: 4;
+}
+.sensor-eye {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+}
+
+.animal-zone-right {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 16px;
+  position: relative;
+}
+.sensor-top-caption {
+  font: 600 9.5px 'DM Mono', monospace;
+  color: #7dd3fc;
+  background: rgba(14, 165, 233, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.horizontal-beam-track {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 18px;
+}
+.horizontal-beam-line {
+  height: 2px;
+  width: 84%;
+  background: repeating-linear-gradient(
+    to right,
+    #38bdf8 0px,
+    #38bdf8 5px,
+    transparent 5px,
+    transparent 9px
+  );
+  position: relative;
+  transition: width 0.55s var(--ease-out), background 0.3s;
+}
+.horizontal-beam-line::before {
+  content: attr(data-dist);
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(14, 165, 233, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  color: #7dd3fc;
+  font: 600 10px 'DM Mono', monospace;
+  white-space: nowrap;
+}
+.animal-target-marker {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1.5px solid #38bdf8;
+  color: #7dd3fc;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: all 0.45s var(--ease-spring);
+}
+.scale-machine.eating-state .animal-target-marker {
+  background: #0284c7;
+  color: #fff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.7);
+  transform: scale(1.12);
+}
+
+/* Saco de Ração e Vaca Animados */
+.actors-stage {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 6px 8px 2px;
+  min-height: 148px;
+  position: relative;
+}
+.actor-entity {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 25;
+  transition: transform 0.35s var(--ease-spring), filter 0.3s, opacity 0.3s;
+}
+.actor-entity:hover:not(:disabled) {
+  transform: translateY(-6px) scale(1.05);
+  filter: drop-shadow(0 14px 20px rgba(15, 23, 42, 0.18));
+}
+.actor-entity:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.feed-actor {
+  cursor: grab;
+  animation: feedBob 3.4s ease-in-out infinite;
+}
+.feed-actor.dragging {
+  cursor: grabbing;
+  animation: none;
+  transition: none;
+  z-index: 100;
+  filter: drop-shadow(0 24px 32px rgba(15, 23, 42, 0.32));
+}
+.feed-actor.pouring svg {
+  transform: rotate(-38deg) translateY(-10px);
+}
+.feed-actor svg {
+  width: 112px;
+  height: 112px;
+  transition: transform 0.4s var(--ease-spring);
+  overflow: visible;
+}
+.sparkle-grain {
+  animation: floatSparkle 2.4s ease-in-out infinite;
+}
+.sparkle-grain.sg2 { animation-delay: 0.8s; }
+.sparkle-grain.sg3 { animation-delay: 1.5s; }
+
+.cow-actor {
+  animation: cowIdle 4s ease-in-out infinite;
+}
+.cow-actor svg {
+  width: 126px;
+  height: 112px;
+  overflow: visible;
+  transition: transform 0.4s var(--ease-spring);
+}
+.cow-tail {
+  transform-origin: 102px 62px;
+  animation: tailSwish 2.2s ease-in-out infinite alternate;
+}
+.cow-ear-l {
+  transform-origin: 30px 34px;
+  animation: earWiggle 3.2s ease-in-out infinite;
+}
+.cow-ear-r {
+  transform-origin: 64px 34px;
+  animation: earWiggle 3.2s ease-in-out infinite reverse;
+}
+.cow-actor.eating {
+  animation: cowApproachTrough 0.55s ease-in-out infinite alternate;
+}
+.cow-actor.eating .cow-head {
+  transform-origin: 47px 46px;
+  animation: cowChomp 0.35s ease-in-out infinite alternate;
+}
+.eating-bubble {
+  position: absolute;
+  top: -14px;
+  right: -12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #0284c7;
+  color: #fff;
+  font: 700 10px 'DM Mono', monospace;
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.35);
+  opacity: 0;
+  transform: scale(0.7) translateY(6px);
+  transition: all 0.3s var(--ease-spring);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.cow-actor.eating .eating-bubble {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.actor-caption {
+  margin-top: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font: 700 11px 'DM Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+.feed-caption {
+  background: #166534;
+  color: #fff;
+}
+.cow-caption {
+  background: #0284c7;
+  color: #fff;
+}
+
+/* Painel Direito: Gráfico de Linha SVG em Tempo Real */
+.chart-live-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+}
+.chart-panel-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.chart-panel-top h3 {
+  font: 700 17px 'Space Grotesk', sans-serif;
+  color: #0f172a;
+}
+.chart-panel-top p {
+  font-size: 12.5px;
+  color: #64748b;
+}
+.storage-state-badge {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font: 700 11.5px 'DM Mono', monospace;
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.4s var(--ease-spring);
+}
+.storage-state-badge.full {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.18);
+}
+.storage-state-badge.eating {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #7dd3fc;
+}
+
+.line-chart-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 16px 16px 10px;
+  position: relative;
+}
+.line-chart-svg {
+  width: 100%;
+  height: 235px;
+  display: block;
+  overflow: visible;
+}
+.chart-line-path {
+  fill: none;
+  stroke: #16a34a;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.4s ease;
+}
+.chart-area-path {
+  transition: opacity 0.4s ease;
+}
+.chart-head-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dotRadar 1.8s ease-out infinite;
+}
+
+.chart-metrics-strip {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.c-metric {
+  background: #f1f5f9;
+  border-radius: 13px;
+  padding: 11px 8px;
+  text-align: center;
+}
+.c-metric small {
+  display: block;
+  font: 500 9px 'DM Mono', monospace;
+  color: #64748b;
+}
+.c-metric strong {
+  display: block;
+  font: 700 14.5px 'Space Grotesk', sans-serif;
+  color: #0f172a;
+  margin-top: 2px;
+  transition: color 0.3s;
+}
+
+/* ==========================================================================
+   04 / CONTATO & RODAPÉ
+   ========================================================================== */
+.contact-section {
+  padding: 72px 0 88px;
+  text-align: center;
+}
+.contact-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 820px;
+  margin: 34px auto 0;
+  text-align: left;
+}
+.c-card {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease-spring), border-color 0.35s, background 0.35s;
+}
+.c-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-light);
+  background: var(--surface-hover);
+}
+.c-card-left { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.c-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.16);
+  color: var(--accent-light);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.c-card-info { min-width: 0; }
+.c-card h4 { font: 700 13.5px 'Space Grotesk', sans-serif; line-height: 1.2; }
+.c-card p { font-size: 11px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Notificação Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px) scale(0.96);
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: #0f172a;
+  border: 1px solid rgba(192, 132, 252, 0.45);
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s var(--ease-spring);
+  z-index: 2500;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+
+/* Animações de Entrada */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(5px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.16s; }
+.d3 { transition-delay: 0.24s; }
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+@keyframes textShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+@keyframes spinReverse { to { transform: rotate(-360deg); } }
+@keyframes emblemFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes badgeBob1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes badgeBob2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes pulseSlow {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes grainCascade {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(82px) scale(0.6); opacity: 0; }
+}
+@keyframes feedBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes floatSparkle {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(-7px); opacity: 0.35; }
+}
+@keyframes cowIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes tailSwish {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(16deg); }
+}
+@keyframes earWiggle {
+  0%, 85%, 100% { transform: rotate(0deg); }
+  92% { transform: rotate(-12deg); }
+}
+@keyframes cowApproachTrough {
+  0% { transform: translateX(0) translateY(0) scale(1.02); }
+  100% { transform: translateX(-14px) translateY(-6px) scale(1.06); }
+}
+@keyframes cowChomp {
+  0% { transform: rotate(-4deg) translateY(0); }
+  100% { transform: rotate(7deg) translateY(4px); }
+}
+@keyframes dotRadar {
+  0% { transform: scale(0.9); opacity: 0.75; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (TABLETS E CELULARES)
+   ========================================================================== */
+@media (max-width: 980px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 36px;
+  }
+  .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-badges-row, .hero-actions {
+    justify-content: center;
+  }
+  .about-stack-grid, .sim-grid, .stepper-grid, .agri-roles-grid {
+    grid-template-columns: 1fr;
+  }
+  .light-showcase { padding: 36px 22px; border-radius: 26px; }
+  .agrifarm-banner-card { padding: 28px 20px; }
+}
+
+@media (max-width: 720px) {
+  .floating-nav a { padding: 8px 12px; font-size: 12px; }
+  .stack-cards, .pillars-mini, .contact-cards-row {
+    grid-template-columns: 1fr;
+  }
+  .dual-lcd-row { grid-template-columns: 1fr; }
+  .chart-metrics-strip { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .orbit-ring.outer { width: 256px; height: 256px; }
+  .orbit-ring.inner { width: 202px; height: 202px; }
+  .toast { max-width: 92vw; white-space: normal; text-align: center; border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+<!-- Barra de Progresso de Rolagem -->
+<div id="scrollProgress"></div>
+
+<!-- Barra de Navegação Flutuante em Formato Pílula (Apenas 4 Links) -->
+<div class="floating-nav-wrap">
+  <nav class="floating-nav" id="floatingNav" aria-label="Navegação principal">
+    <div class="nav-pill-slider" id="navPillSlider"></div>
+    <a href="#inicio" class="active">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#agrifarm">AgriFarm</a>
+    <a href="#contato" class="nav-cta-pill">Contato</a>
+  </nav>
+</div>
+
+<!-- ========================================================================
+     SEÇÃO HERO (2 COLUNAS + EMBLEMA </> + 4 DESTAQUES)
+     ======================================================================== -->
+<header class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-split">
+      <!-- Coluna Esquerda: Apresentação Profissional -->
+      <div class="hero-content">
+        <div class="hero-badges-row reveal">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Disponível para estágio</span>
+          </div>
+          <div class="edu-pill">
+            <i class="fa-solid fa-graduation-cap" style="color:#c084fc"></i>
+            <span>Técnico em Desenvolvimento de Sistemas</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title reveal d1">
+          <span class="line-white">Bruna Figueira Silva</span>
+          <span class="line-accent">Desenvolvedora Back-end</span>
+        </h1>
+
+        <p class="hero-bio reveal d2">
+          Formada em <strong>Técnico em Desenvolvimento de Sistemas</strong>, projeto estruturas servidoras, bancos de dados relacionais e regras de negócio seguras — unindo organização de produto e engenharia de software para entregar sistemas confiáveis.
+        </p>
+
+        <div class="hero-actions reveal d3">
+          <a href="#agrifarm" class="btn btn-primary">
+            Conhecer o AgriFarm <i class="fa-solid fa-layer-group"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Emblema Interativo </> com Órbitas -->
+      <div class="hero-visual reveal d2">
+        <div class="code-emblem-stage">
+          <div class="emblem-glow"></div>
+          <div class="orbit-ring outer"><span class="orbit-dot"></span></div>
+          <div class="orbit-ring inner"><span class="orbit-dot"></span></div>
+
+          <span class="floating-tech-pill ftp-1"><i class="fa-brands fa-laravel" style="color:#f87171"></i> Laravel 12</span>
+          <span class="floating-tech-pill ftp-2"><i class="fa-solid fa-database" style="color:#38bdf8"></i> Banco MySQL</span>
+          <span class="floating-tech-pill ftp-3"><i class="fa-solid fa-universal-access" style="color:#4ade80"></i> Acessibilidade</span>
+
+          <div class="code-core-box" id="codeCoreBox" role="img" aria-label="Símbolo de código Back-end">
+            <div class="code-symbol-big">&lt;/&gt;</div>
+            <span class="code-core-sub">BACK-END DEVELOPER</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ========================================================================
+     SEÇÃO 01 / SOBRE & STACK
+     ======================================================================== -->
+<section class="section" id="sobre">
+  <div class="container">
+    <div class="section-header-center">
+      <span class="section-eyebrow reveal">01 / SOBRE &amp; STACK</span>
+      <h2 class="section-heading reveal d1">Estruturação de dados, lógica servidora e qualidade de entrega.</h2>
+    </div>
+
+    <div class="about-stack-grid">
+      <!-- Coluna Esquerda: Trajetória, Formação & Pilares -->
+      <div class="about-box reveal d2">
+        <div>
+          <p>Minha atuação é voltada para o desenvolvimento <strong>back-end</strong>: organizo bancos de dados relacionais, estruturo a lógica do servidor, garanto autenticação segura por sessão e valido regras de negócio diretamente no sistema.</p>
+          <p>Também aplico práticas de <strong>acessibilidade digital</strong> salvas por usuário e busco uma oportunidade de estágio onde eu possa contribuir com código limpo, colaborar com a equipe e evoluir na prática.</p>
+
+          <div class="formation-box">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+              <strong>Técnico em Desenvolvimento de Sistemas</strong>
+              <span>Formação técnica completa com foco em lógica de programação, bancos de dados relacionais, arquitetura web e desenvolvimento de aplicações reais.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillars-mini">
+          <div class="pillar-item"><i class="fa-solid fa-server"></i><span>Lógica Servidora</span></div>
+          <div class="pillar-item"><i class="fa-solid fa-database"></i><span>Banco de Dados MySQL</span></div>
+          <div class="pillar-item"><i class="fa-solid fa-shield-halved"></i><span>Segurança &amp; Acesso</span></div>
+          <div class="pillar-item"><i class="fa-solid fa-universal-access"></i><span>Acessibilidade Digital</span></div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: 4 Cards de Stack -->
+      <div class="stack-cards reveal d3">
+        <div class="stack-card">
+          <div>
+            <div class="stack-card-head"><div class="stack-icon"><i class="fa-solid fa-server"></i></div><h3>Back-end &amp; Servidor</h3></div>
+            <p class="stack-card-desc">Construção de regras de negócio, autenticação por sessão e controle de rotas no servidor.</p>
+          </div>
+          <div class="chips"><span class="chip">PHP 8+</span><span class="chip">Laravel 12</span><span class="chip">Eloquent</span><span class="chip">Sessão &amp; Rotas</span></div>
+        </div>
+
+        <div class="stack-card">
+          <div>
+            <div class="stack-card-head"><div class="stack-icon"><i class="fa-solid fa-database"></i></div><h3>Banco de Dados</h3></div>
+            <p class="stack-card-desc">Organização de tabelas normalizadas, integridade entre registros e histórico confiável.</p>
+          </div>
+          <div class="chips"><span class="chip">MySQL</span><span class="chip">Modelagem Relacional</span><span class="chip">Migrations</span><span class="chip">Chaves &amp; Relações</span></div>
+        </div>
+
+        <div class="stack-card">
+          <div>
+            <div class="stack-card-head"><div class="stack-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Interfaces &amp; Gráficos</h3></div>
+            <p class="stack-card-desc">Painéis web interativos com gráficos dinâmicos e telas móveis para acompanhamento em campo.</p>
+          </div>
+          <div class="chips"><span class="chip">Blade</span><span class="chip">JavaScript ES6+</span><span class="chip">Chart.js</span><span class="chip">Flutter &amp; Dart</span></div>
+        </div>
+
+        <div class="stack-card">
+          <div>
+            <div class="stack-card-head"><div class="stack-icon"><i class="fa-solid fa-code-branch"></i></div><h3>Versionamento &amp; Fluxo</h3></div>
+            <p class="stack-card-desc">Trabalho colaborativo organizado por etapas de entrega, controle de versões e revisão contínua.</p>
+          </div>
+          <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Métodos Ágeis</span><span class="chip">VS Code</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     SEÇÃO 02 / AGRIFARM — ESTUDO DE CASO COMPLETO
+     ======================================================================== -->
+<section class="agrifarm-deep-section" id="agrifarm">
+  <div class="container">
+    <div class="section-header-center">
+      <span class="section-eyebrow reveal">02 / ESTUDO DE CASO COMPLETO</span>
+      <h2 class="section-heading reveal d1">AgriFarm: como o projeto foi criado.</h2>
+      <p class="section-sub reveal d2">Desenvolvido como Trabalho de Conclusão de Curso para substituir controles manuais na pecuária por uma plataforma centralizada com monitoramento inteligente de cochos.</p>
+    </div>
+
+    <article class="agrifarm-banner-card reveal d2" style="margin-top:42px">
+      <div class="agrifarm-top-row">
+        <span class="agri-pill"><i class="fa-solid fa-leaf"></i> PROJETO PRINCIPAL • GESTÃO RURAL &amp; MONITORAMENTO</span>
+        <h3>Agri<span>Farm</span></h3>
+        <p>O <strong>AgriFarm</strong> nasceu para permitir que produtores acompanhem o abastecimento de ração e a frequência com que os animais se aproximam dos cochos. No projeto, assumi três frentes complementares:</p>
+
+        <!-- 3 Cards de Atuação -->
+        <div class="agri-roles-grid">
+          <div class="agri-role-box">
+            <div class="agri-role-head">
+              <i class="fa-solid fa-bullseye"></i>
+              <strong>Product Owner (PO)</strong>
+            </div>
+            <p>Levantamento das necessidades do campo, definição das funcionalidades essenciais e organização das prioridades do projeto.</p>
+          </div>
+          <div class="agri-role-box">
+            <div class="agri-role-head">
+              <i class="fa-solid fa-people-arrows"></i>
+              <strong>Scrum Master</strong>
+            </div>
+            <p>Organização das etapas de entrega, reuniões rápidas de acompanhamento, resolução de bloqueios e alinhamento da equipe.</p>
+          </div>
+          <div class="agri-role-box">
+            <div class="agri-role-head">
+              <i class="fa-solid fa-server"></i>
+              <strong>Desenvolvedora Back-end</strong>
+            </div>
+            <p>Estruturação das 10 tabelas no MySQL, criação das regras do sistema em Laravel 12 e integração com a balança e o sensor.</p>
+          </div>
+        </div>
+
+        <div class="agri-cta-group">
+          <a href="https://github.com/BrunaFigueiraSilva" target="_blank" rel="noopener" class="btn btn-agri">
+            Ver código no GitHub <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="#simulador" class="btn btn-ghost">
+            Ir para a interação ao vivo <i class="fa-solid fa-arrow-down"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navegador Interativo de 6 Etapas -->
+      <div class="stepper-container">
+        <div class="stepper-controls-bar">
+          <span class="stepper-counter" id="stepperCounter">ETAPA 01 DE 06 • CONCEPÇÃO &amp; PLANEJAMENTO</span>
+          <div class="stepper-arrows">
+            <button class="arrow-btn" id="prevStageBtn" type="button" disabled>← Anterior</button>
+            <button class="arrow-btn" id="nextStageBtn" type="button">Próxima →</button>
+          </div>
+        </div>
+
+        <div class="stepper-track"><div class="stepper-fill" id="stepperFill"></div></div>
+
+        <div class="stepper-grid">
+          <div class="step-tabs-col" role="tablist">
+            <button class="step-btn active" data-stage="0" type="button">
+              <span class="step-idx">01</span>
+              <div class="step-btn-info"><strong>Concepção &amp; Planejamento</strong><small>Escopo, requisitos e etapas</small></div>
+            </button>
+            <button class="step-btn" data-stage="1" type="button">
+              <span class="step-idx">02</span>
+              <div class="step-btn-info"><strong>Modelagem Relacional</strong><small>MySQL • 10 tabelas interligadas</small></div>
+            </button>
+            <button class="step-btn" data-stage="2" type="button">
+              <span class="step-idx">03</span>
+              <div class="step-btn-info"><strong>Back-end &amp; Regras de Negócio</strong><small>Laravel 12 • 9 Modelos de Dados</small></div>
+            </button>
+            <button class="step-btn" data-stage="3" type="button">
+              <span class="step-idx">04</span>
+              <div class="step-btn-info"><strong>Balança &amp; Sensor de Distância</strong><small>Peso da ração + distância do animal</small></div>
+            </button>
+            <button class="step-btn" data-stage="4" type="button">
+              <span class="step-idx">05</span>
+              <div class="step-btn-info"><strong>Entrega Web &amp; App em Campo</strong><small>Dashboard Blade/Chart.js + Flutter</small></div>
+            </button>
+            <button class="step-btn" data-stage="5" type="button">
+              <span class="step-idx">06</span>
+              <div class="step-btn-info"><strong>Acessibilidade Personalizada</strong><small>Inclusão • Preferências no MySQL</small></div>
+            </button>
+          </div>
+
+          <div class="step-stage-card" id="stageCard">
+            <div>
+              <span class="stage-tag" id="stageTag"><i class="fa-solid fa-compass-drafting"></i> ETAPA 01 • PLANEJAMENTO DO PRODUTO</span>
+              <h4 id="stageTitle">Levantamento de necessidades rurais e organização das entregas</h4>
+              <p id="stageDesc">A criação do AgriFarm começou pela análise do problema real nas propriedades: desperdício de ração e falta de controle sobre o consumo por lote, organizando todo o desenvolvimento em etapas.</p>
+              <ul class="stage-list" id="stageList">
+                <li><i class="fa-solid fa-check"></i><span>Mapeamento das funções principais: cadastro de fazendas, divisão por lotes, estoque de ração e monitoramento de cochos.</span></li>
+                <li><i class="fa-solid fa-check"></i><span>Priorização do banco de dados e das regras principais logo nas primeiras entregas para garantir segurança nas informações.</span></li>
+                <li><i class="fa-solid fa-check"></i><span>Definição clara de critérios de validação para testar cada funcionalidade na web e no aplicativo.</span></li>
+              </ul>
+            </div>
+            <div class="stage-flow-box" id="stageArch">
+              <span class="flow-node">Problema Rural</span>
+              <i class="fa-solid fa-arrow-right flow-arrow"></i>
+              <span class="flow-node">Lista de Prioridades</span>
+              <i class="fa-solid fa-arrow-right flow-arrow"></i>
+              <span class="flow-node">Entregas por Etapas</span>
+              <i class="fa-solid fa-arrow-right flow-arrow"></i>
+              <span class="flow-node">Primeira Versão</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========================================================================
+     SEÇÃO 03 / INTERAÇÃO AO VIVO (CARD DE ALTO CONTRASTE CLARO #f4f7fb)
+     ======================================================================== -->
+<section class="playground-wrapper" id="simulador">
+  <div class="container">
+    <div class="light-showcase reveal">
+      <div class="light-showcase-header">
+        <span class="light-badge"><i class="fa-solid fa-satellite-dish"></i> 03 / INTERAÇÃO AO VIVO • BALANÇA + SENSOR DE DISTÂNCIA</span>
+        <h2>Agora teste a operação na prática.</h2>
+        <p class="lead">Arraste (ou clique) na <strong>Ração animada</strong> para abastecer a <strong>Balança</strong> até <strong>Armazenamento Cheio (100 kg)</strong>. Depois, clique na <strong>Vaca</strong>: ela se aproxima do cocho (o <strong>Sensor de Distância</strong> detecta o animal a <strong>18,0 cm</strong>) e consome a ração.</p>
+        <button class="reset-sim-btn" id="resetSimBtn" type="button">
+          <i class="fa-solid fa-rotate-left"></i> Reiniciar simulação
+        </button>
+      </div>
+
+      <div class="sim-grid">
+        <!-- Painel Esquerdo: Hardware + Saco e Vaca Interativos -->
+        <div class="scale-bay">
+          <div class="scale-machine" id="scaleMachine">
+            <div class="scale-top-meta">
+              <span>AGRIFARM • COCHO 01 (BALANÇA + DISTÂNCIA ANIMAL)</span>
+              <span class="scale-led"></span>
+            </div>
+
+            <div class="dual-lcd-row">
+              <div class="lcd-box">
+                <span class="lcd-label"><i class="fa-solid fa-weight-scale" style="color:#4ade80"></i> Balança (Ração)</span>
+                <div class="lcd-val" id="lcdWeight">20,0 kg</div>
+                <span class="lcd-foot" id="lcdStatusPill">Nível Baixo • 20%</span>
+              </div>
+              <div class="lcd-box">
+                <span class="lcd-label"><i class="fa-solid fa-cow" style="color:#38bdf8"></i> Distância Animal</span>
+                <div class="lcd-val dist-val" id="lcdDistance">145,0 cm</div>
+                <span class="lcd-foot" id="lcdDistState">Animal afastado</span>
+              </div>
+            </div>
+
+            <!-- Cocho Visual + Sensor Ultrassônico Lateral -->
+            <div class="scale-platform-zone" id="scaleDropZone">
+              <div class="trough-assembly">
+                <div class="falling-grains" id="fallingGrains">
+                  <span class="grain-dot"></span>
+                  <span class="grain-dot"></span>
+                  <span class="grain-dot"></span>
+                  <span class="grain-dot"></span>
+                  <span class="grain-dot"></span>
+                  <span class="grain-dot"></span>
+                </div>
+
+                <div class="trough-bowl">
+                  <div class="feed-mound" id="feedMound" style="height:20%"></div>
+                </div>
+
+                <div class="trough-side-sensor" title="Sensor ultrassônico apontado para a área do animal">
+                  <span class="sensor-eye"></span>
+                  <span class="sensor-eye"></span>
+                </div>
+
+                <div class="scale-base-bar"></div>
+              </div>
+
+              <div class="animal-zone-right">
+                <span class="sensor-top-caption">SENSOR DISTÂNCIA • ANIMAL AO COCHO</span>
+                <div class="horizontal-beam-track">
+                  <div class="horizontal-beam-line" id="ultrasonicBeam" data-dist="145,0 cm" style="width:84%"></div>
+                  <div class="animal-target-marker" id="animalTargetMarker" title="Posição do animal em relação ao cocho">
+                    <i class="fa-solid fa-cow"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saco de Ração Arrastável/Clicável & Vaca Clicável -->
+          <div class="actors-stage">
+            <div class="actor-entity feed-actor" id="feedSackActor" role="button" tabindex="0" aria-label="Animação de ração: arraste até a balança ou clique para despejar">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="sparkle-grain" cx="24" cy="28" r="3.5" fill="#facc15"/>
+                <circle class="sparkle-grain sg2" cx="94" cy="24" r="3" fill="#fde047"/>
+                <circle class="sparkle-grain sg3" cx="88" cy="46" r="2.5" fill="#eab308"/>
+                <ellipse cx="60" cy="103" rx="44" ry="10" fill="#ca8a04" opacity="0.28"/>
+                <path d="M34 38 C24 54, 22 86, 30 98 C36 105, 84 105, 90 98 C98 86, 96 54, 86 38 Z" fill="#15803d" stroke="#14532d" stroke-width="2.5"/>
+                <path d="M40 24 L80 24 L74 36 L46 36 Z" fill="#16a34a" stroke="#14532d" stroke-width="2"/>
+                <rect x="44" y="34" width="32" height="5" rx="2.5" fill="#facc15"/>
+                <path d="M45 24 Q60 12 75 24 Z" fill="#facc15"/>
+                <circle cx="60" cy="68" r="17" fill="#dcfce7"/>
+                <path d="M60 57 C54 63, 54 73, 60 79 C66 73, 66 63, 60 57 Z" fill="#16a34a"/>
+                <path d="M60 61 L60 77" stroke="#dcfce7" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span class="actor-caption feed-caption"><i class="fa-solid fa-wheat-awn"></i> Colocar Ração</span>
+            </div>
+
+            <button class="actor-entity cow-actor" id="cowActorBtn" type="button" aria-label="Animação de vaca: clique para a vaca se aproximar do cocho e comer">
+              <span class="eating-bubble">No cocho (18 cm)!</span>
+              <svg viewBox="0 0 135 118" aria-hidden="true">
+                <ellipse cx="66" cy="107" rx="46" ry="8" fill="#0f172a" opacity="0.12"/>
+                <g class="cow-tail">
+                  <path d="M102 62 Q118 68 115 86" fill="none" stroke="#334155" stroke-width="3.5" stroke-linecap="round"/>
+                  <ellipse cx="115" cy="88" rx="4.5" ry="6.5" fill="#1e293b"/>
+                </g>
+                <rect x="44" y="78" width="9" height="26" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                <rect x="44" y="99" width="9" height="5" rx="2" fill="#334155"/>
+                <rect x="58" y="80" width="9" height="25" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5"/>
+                <rect x="58" y="100" width="9" height="5" rx="2" fill="#334155"/>
+                <rect x="82" y="78" width="9" height="26" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                <rect x="82" y="99" width="9" height="5" rx="2" fill="#334155"/>
+                <rect x="94" y="80" width="9" height="25" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5"/>
+                <rect x="94" y="100" width="9" height="5" rx="2" fill="#334155"/>
+                <rect x="38" y="46" width="68" height="40" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <path d="M58 47 C66 47, 72 55, 65 63 C59 69, 51 61, 58 47 Z" fill="#1e293b"/>
+                <circle cx="88" cy="66" r="9" fill="#1e293b"/>
+                <circle cx="77" cy="76" r="5" fill="#1e293b"/>
+                <g class="cow-head">
+                  <path d="M33 25 Q28 15 36 17" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+                  <path d="M59 25 Q64 15 56 17" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+                  <ellipse class="cow-ear-l" cx="25" cy="34" rx="8" ry="4.5" transform="rotate(-18 25 34)" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <ellipse class="cow-ear-r" cx="67" cy="34" rx="8" ry="4.5" transform="rotate(18 67 34)" fill="#1e293b"/>
+                  <rect x="28" y="23" width="36" height="36" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                  <circle cx="54" cy="36" r="7.5" fill="#1e293b"/>
+                  <circle cx="38" cy="36" r="2.6" fill="#0f172a"/>
+                  <circle cx="54" cy="36" r="2.6" fill="#ffffff"/>
+                  <rect x="30" y="44" width="32" height="16" rx="8" fill="#fbcfe8" stroke="#f472b6" stroke-width="1.5"/>
+                  <circle cx="40" cy="51" r="2" fill="#be185d"/>
+                  <circle cx="52" cy="51" r="2" fill="#be185d"/>
+                </g>
+              </svg>
+              <span class="actor-caption cow-caption"><i class="fa-solid fa-cow"></i> Vaca Comer</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Painel Direito: Gráfico de Linha SVG em Tempo Real -->
+        <div class="chart-live-panel">
+          <div class="chart-panel-top">
+            <div>
+              <h3>Nível de Ração no Cocho (Balança)</h3>
+              <p>Atualizado com a presença do animal no sensor</p>
+            </div>
+            <span class="storage-state-badge" id="storageBadge">
+              <i class="fa-solid fa-circle-dot"></i>
+              <span id="storageBadgeText">Repor Ração (20%)</span>
+            </span>
+          </div>
+
+          <div class="line-chart-box">
+            <svg class="line-chart-svg" id="storageLineSvg" viewBox="0 0 520 220" role="img" aria-label="Gráfico de linha do nível de ração na balança">
+              <defs>
+                <linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" id="gradStopTop" stop-color="#16a34a" stop-opacity="0.28"/>
+                  <stop offset="100%" id="gradStopBot" stop-color="#16a34a" stop-opacity="0.01"/>
+                </linearGradient>
+              </defs>
+
+              <line x1="48" y1="24" x2="496" y2="24" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="5 5"/>
+              <text x="42" y="28" text-anchor="end" font-family="DM Mono, monospace" font-size="10" fill="#15803d" font-weight="600">100%</text>
+              <text x="494" y="18" text-anchor="end" font-family="DM Mono, monospace" font-size="9.5" fill="#15803d" font-weight="600">ARMAZENAMENTO CHEIO (100 kg)</text>
+
+              <line x1="48" y1="104" x2="496" y2="104" stroke="#cbd5e1" stroke-width="1"/>
+              <text x="42" y="108" text-anchor="end" font-family="DM Mono, monospace" font-size="10" fill="#64748b">50%</text>
+
+              <line x1="48" y1="168" x2="496" y2="168" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 4"/>
+              <text x="42" y="172" text-anchor="end" font-family="DM Mono, monospace" font-size="10" fill="#d97706">20%</text>
+
+              <line x1="48" y1="192" x2="496" y2="192" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="42" y="195" text-anchor="end" font-family="DM Mono, monospace" font-size="10" fill="#64748b">0%</text>
+
+              <path id="chartAreaPath" class="chart-area-path" fill="url(#chartAreaGrad)" d=""/>
+              <path id="chartLinePath" class="chart-line-path" d=""/>
+              <g id="chartDotsGroup"></g>
+
+              <circle id="chartHeadHalo" class="chart-head-pulse" cx="48" cy="168" r="11" fill="#f59e0b" opacity="0.28"/>
+              <circle id="chartHeadDot" cx="48" cy="168" r="5.5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="chart-metrics-strip">
+            <div class="c-metric">
+              <small>BALANÇA</small>
+              <strong id="metricPeso">20,0 kg</strong>
+            </div>
+            <div class="c-metric">
+              <small>DISTÂNCIA ANIMAL</small>
+              <strong id="metricDist" style="color:#0284c7">145,0 cm</strong>
+            </div>
+            <div class="c-metric">
+              <small>ESTOQUE</small>
+              <strong id="metricPct">20%</strong>
+            </div>
+            <div class="c-metric">
+              <small>ANIMAL</small>
+              <strong id="metricEvent" style="color:#64748b">Afastado</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     SEÇÃO 04 / CONTATO & RODAPÉ
+     ======================================================================== -->
+<section class="contact-section" id="contato">
+  <div class="container">
+    <div class="section-header-center">
+      <span class="section-eyebrow reveal">04 / CONTATO</span>
+      <h2 class="section-heading reveal d1">Vamos conversar sobre uma oportunidade de estágio?</h2>
+      <p class="section-sub reveal d2">Aberta a processos seletivos e conversas sobre oportunidades de estágio.</p>
+    </div>
+
+    <div class="contact-cards-row reveal d3">
+      <a class="c-card" href="https://github.com/BrunaFigueiraSilva" target="_blank" rel="noopener">
+        <div class="c-card-left">
+          <div class="c-card-icon"><i class="fa-brands fa-github"></i></div>
+          <div class="c-card-info"><h4>GitHub</h4><p>@BrunaFigueiraSilva</p></div>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--muted);font-size:12px"></i>
+      </a>
+
+      <a class="c-card" href="https://www.linkedin.com/in/SEU-LINKEDIN/" target="_blank" rel="noopener">
+        <div class="c-card-left">
+          <div class="c-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div class="c-card-info"><h4>LinkedIn</h4><p>Trajetória e conexões</p></div>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--muted);font-size:12px"></i>
+      </a>
+
+      <button class="c-card" id="copyEmailCard" type="button" data-email="brunafsilva.09@icloud.com">
+        <div class="c-card-left">
+          <div class="c-card-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div class="c-card-info"><h4>E-mail</h4><p>brunafsilva.09@icloud.com</p></div>
+        </div>
+        <i class="fa-regular fa-copy" style="color:var(--muted);font-size:12px"></i>
+      </button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Bruna Figueira Silva — Desenvolvedora Back-end.</span>
+    <a href="#inicio" style="color:#cbd5e1">Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<!-- Notificação Toast (Sem alert/confirm) -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <i class="fa-solid fa-circle-check" style="color:var(--green-soft)"></i>
+  <span id="toastText">Copiado!</span>
+</div>
+
+<script>
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ========================================================================
+  // SISTEMA DE NOTIFICAÇÃO TOAST & CÓPIA SEGURA PARA ÁREA DE TRANSFERÊNCIA
+  // ========================================================================
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+
+  function showToast(msg) {
+    toastText.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  function copyTextSafely(text, successMsg) {
+    try {
+      const tempArea = document.createElement('textarea');
+      tempArea.value = text;
+      tempArea.setAttribute('readonly', '');
+      tempArea.style.position = 'fixed';
+      tempArea.style.top = '-9999px';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      tempArea.setSelectionRange(0, 99999);
+      const copied = document.execCommand('copy');
+      document.body.removeChild(tempArea);
+      if (copied) {
+        showToast(successMsg);
+        return;
+      }
+    } catch (err) {
+      // Fallback abaixo caso necessário
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => showToast(successMsg))
+        .catch(() => showToast(`Copie manualmente: ${text}`));
+    } else {
+      showToast(`Copie manualmente: ${text}`);
+    }
+  }
+
+  // Botão Copiar E-mail
+  const copyEmailCard = document.getElementById('copyEmailCard');
+  copyEmailCard.addEventListener('click', () => {
+    const email = copyEmailCard.dataset.email;
+    copyTextSafely(email, `E-mail copiado: ${email}`);
+  });
+
+  // ========================================================================
+  // NAVEGAÇÃO FLUTUANTE EM PÍLULA + INDICADOR DESLIZANTE + BARRA DE ROLAGEM
+  // ========================================================================
+  const nav = document.getElementById('floatingNav');
+  const slider = document.getElementById('navPillSlider');
+  const navLinks = [...nav.querySelectorAll('a[href^="#"]')];
+  const progress = document.getElementById('scrollProgress');
+
+  function moveSliderTo(el) {
+    if (!el || el.classList.contains('nav-cta-pill')) {
+      slider.style.opacity = '0';
+      return;
+    }
+    slider.style.opacity = '1';
+    slider.style.width = el.offsetWidth + 'px';
+    slider.style.transform = `translateX(${el.offsetLeft - 6}px)`;
+  }
+
+  function updateScroll() {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 40);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+
+    const sections = ['inicio', 'sobre', 'agrifarm', 'contato']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    let current = sections[0];
+    for (const sec of sections) {
+      if (y >= sec.offsetTop - 220) current = sec;
+    }
+
+    navLinks.forEach(a => {
+      const isMatch = a.getAttribute('href') === `#${current.id}`;
+      a.classList.toggle('active', isMatch);
+      if (isMatch) moveSliderTo(a);
+    });
+  }
+
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  window.addEventListener('resize', updateScroll);
+  setTimeout(updateScroll, 60);
+
+  // ========================================================================
+  // REVELAÇÃO SUAVE AO ROLAR (INTERSECTION OBSERVER)
+  // ========================================================================
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  // Inclinação 3D suave no Emblema </>
+  const codeBox = document.getElementById('codeCoreBox');
+  if (codeBox && !reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    codeBox.addEventListener('mousemove', e => {
+      const r = codeBox.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      codeBox.style.transform = `rotateY(${px * 22}deg) rotateX(${-py * 22}deg) scale(1.04)`;
+    });
+    codeBox.addEventListener('mouseleave', () => {
+      codeBox.style.transform = '';
+    });
+  }
+
+  // ========================================================================
+  // NAVEGADOR INTERATIVO DE 6 ETAPAS DO AGRIFARM
+  // ========================================================================
+  const stages = [
+    {
+      counter: 'ETAPA 01 DE 06 • CONCEPÇÃO & PLANEJAMENTO',
+      tag: '<i class="fa-solid fa-compass-drafting"></i> ETAPA 01 • PLANEJAMENTO DO PRODUTO',
+      title: 'Levantamento de necessidades rurais e organização das entregas',
+      desc: 'A criação do AgriFarm começou pela análise do problema real nas propriedades: desperdício de ração e falta de controle sobre o consumo por lote, organizando todo o desenvolvimento em etapas.',
+      bullets: [
+        'Mapeamento das funções principais: cadastro de fazendas, divisão por lotes, estoque de ração e monitoramento de cochos.',
+        'Priorização do banco de dados e das regras principais logo nas primeiras entregas para garantir segurança nas informações.',
+        'Definição clara de critérios de validação para testar cada funcionalidade na web e no aplicativo.'
+      ],
+      flow: ['Problema Rural', 'Lista de Prioridades', 'Entregas por Etapas', 'Primeira Versão']
+    },
+    {
+      counter: 'ETAPA 02 DE 06 • MODELAGEM RELACIONAL',
+      tag: '<i class="fa-solid fa-database"></i> ETAPA 02 • BANCO DE DADOS RELACIONAL',
+      title: 'Estruturação das 10 entidades do domínio rural no MySQL',
+      desc: 'Para sustentar toda a rastreabilidade da fazenda sem duplicidade, projetei um banco de dados relacional organizado conectando produtores, animais, cochos, dietas e relatórios.',
+      bullets: [
+        'Modelagem de 10 tabelas: <code>cadastros</code>, <code>fazendas</code>, <code>lotes</code>, <code>animals</code>, <code>cochos</code>, <code>racaos</code>, <code>estoques</code>, <code>planos</code>, <code>relatorios</code> e <code>acessibilidade_preferencias</code>.',
+        'Chaves estrangeiras garantindo que cada animal, lote e cocho pertença exatamente à sua fazenda.',
+        'Base histórica preparada para conferência de consumo e prevenção de desperdícios.'
+      ],
+      flow: ['Fazendas (1)', 'Lotes (N)', 'Animais & Cochos', 'Relatórios Históricos']
+    },
+    {
+      counter: 'ETAPA 03 DE 06 • BACK-END & REGRAS DE NEGÓCIO',
+      tag: '<i class="fa-solid fa-server"></i> ETAPA 03 • LARAVEL 12 & REGRAS DO SISTEMA',
+      title: 'Estrutura do servidor, login seguro e 9 modelos de dados',
+      desc: 'Construí a base do sistema em Laravel 12 com PHP 8+, centralizando o login por sessão, controle de acesso e regras de validação no servidor.',
+      bullets: [
+        'Implementação de <strong>9 modelos de dados</strong> interligados para cadastro, consulta, edição e exclusão completos.',
+        'Proteção de páginas por sessão para manter os dados de cada produtor isolados e seguros.',
+        '<code>DashboardController</code> reúne todos os indicadores no servidor antes de exibir nas telas.'
+      ],
+      flow: ['Rota Protegida', 'Sessão Autenticada', 'Regras no Servidor', 'Banco MySQL']
+    },
+    {
+      counter: 'ETAPA 04 DE 06 • BALANÇA & SENSOR DE DISTÂNCIA',
+      tag: '<i class="fa-solid fa-satellite-dish"></i> ETAPA 04 • PESO DA RAÇÃO & PROXIMIDADE DO ANIMAL',
+      title: 'Balança de ração (kg) e sensor de distância do animal ao cocho (cm)',
+      desc: 'O monitoramento inteligente do cocho combina dois sensores complementares: a célula de carga mede a quantidade de ração disponível, enquanto o sensor ultrassônico mede a distância do animal em relação ao cocho.',
+      bullets: [
+        'O <strong>Sensor de Distância</strong> detecta a aproximação do animal ao cocho (<code>145 cm</code> afastado até <code>18 cm</code> quando o animal se aproxima para comer).',
+        'A <strong>Balança</strong> registra o peso líquido da ração abastecida (kg) e calcula o consumo real durante a presença do animal.',
+        'O cruzamento entre presença do animal e variação de peso evita alertas incorretos e dispara aviso de reposição aos 20%.'
+      ],
+      flow: ['Balança (kg) + Sensor (cm)', 'Presença do Animal', 'Cálculo de Consumo', 'Alerta & Relatório']
+    },
+    {
+      counter: 'ETAPA 05 DE 06 • ENTREGA WEB & APP EM CAMPO',
+      tag: '<i class="fa-solid fa-mobile-screen-button"></i> ETAPA 05 • PAINEL GERENCIAL & CAMPO',
+      title: 'Consumo dos dados no dashboard web e no app mobile em campo',
+      desc: 'A arquitetura back-end alimenta tanto o painel administrativo no escritório quanto o aplicativo multiplataforma usado durante o manejo diário nos currais.',
+      bullets: [
+        'Painel gerencial em <strong>Blade, JavaScript e Chart.js</strong> exibindo gráficos de abastecimento e indicadores por lote.',
+        'Aplicativo móvel em <strong>Flutter e Dart</strong> para consulta rápida de cochos ativos e planos alimentares no campo.',
+        'Sincronização centralizada garantindo consistência entre escritório e operação rural.'
+      ],
+      flow: ['Back-end Laravel 12', 'Dashboard Web (Chart.js)', 'App Mobile (Flutter)', 'Operação Unificada']
+    },
+    {
+      counter: 'ETAPA 06 DE 06 • ACESSIBILIDADE PERSONALIZADA',
+      tag: '<i class="fa-solid fa-universal-access"></i> ETAPA 06 • INCLUSÃO DIGITAL',
+      title: 'Preferências de acessibilidade salvas por usuário no banco',
+      desc: 'Seguindo boas práticas de inclusão digital, implementei um controle dedicado para que cada usuário mantenha suas configurações visuais e de leitura salvas.',
+      bullets: [
+        'Suporte a temas claro, escuro e <strong>alto contraste</strong>, ajuste de fonte, zoom e navegação por teclado.',
+        'Leitura em voz alta, navegação assistiva e integração com tradutor em Libras (<strong>VLibras</strong>).',
+        '<code>AcessibilidadeController</code> salva cada escolha na tabela <code>acessibilidade_preferencias</code>.'
+      ],
+      flow: ['Preferências do Usuário', 'AcessibilidadeController', 'Tabela MySQL', 'Experiência Inclusiva']
+    }
+  ];
+
+  let activeStage = 0;
+  const stageBtns = [...document.querySelectorAll('.step-btn')];
+  const stageCard = document.getElementById('stageCard');
+  const stepperCounter = document.getElementById('stepperCounter');
+  const stepperFill = document.getElementById('stepperFill');
+  const stageTag = document.getElementById('stageTag');
+  const stageTitle = document.getElementById('stageTitle');
+  const stageDesc = document.getElementById('stageDesc');
+  const stageList = document.getElementById('stageList');
+  const stageArch = document.getElementById('stageArch');
+  const prevStageBtn = document.getElementById('prevStageBtn');
+  const nextStageBtn = document.getElementById('nextStageBtn');
+
+  function renderFlowNodes(nodes) {
+    return nodes
+      .map((label, idx) => {
+        const arrow = idx < nodes.length - 1
+          ? '<i class="fa-solid fa-arrow-right flow-arrow"></i>'
+          : '';
+        return `<span class="flow-node">${label}</span>${arrow}`;
+      })
+      .join('');
+  }
+
+  function setStage(idx) {
+    activeStage = Math.max(0, Math.min(stages.length - 1, idx));
+    const s = stages[activeStage];
+
+    stageBtns.forEach((b, i) => b.classList.toggle('active', i === activeStage));
+    stepperCounter.textContent = s.counter;
+    stepperFill.style.width = `${((activeStage + 1) / stages.length) * 100}%`;
+    prevStageBtn.disabled = activeStage === 0;
+    nextStageBtn.disabled = activeStage === stages.length - 1;
+
+    stageCard.classList.add('fade-swap');
+    setTimeout(() => {
+      stageTag.innerHTML = s.tag;
+      stageTitle.textContent = s.title;
+      stageDesc.textContent = s.desc;
+      stageList.innerHTML = s.bullets
+        .map(item => `<li><i class="fa-solid fa-check"></i><span>${item}</span></li>`)
+        .join('');
+      stageArch.innerHTML = renderFlowNodes(s.flow);
+      stageCard.classList.remove('fade-swap');
+    }, reduceMotion ? 0 : 170);
+  }
+
+  stageBtns.forEach(b => b.addEventListener('click', () => setStage(Number(b.dataset.stage))));
+  prevStageBtn.addEventListener('click', () => setStage(activeStage - 1));
+  nextStageBtn.addEventListener('click', () => setStage(activeStage + 1));
+
+  // ========================================================================
+  // SIMULAÇÃO INTERATIVA AO VIVO: BALANÇA + SENSOR DE DISTÂNCIA + GRÁFICO SVG
+  // ========================================================================
+  const scaleMachine = document.getElementById('scaleMachine');
+  const lcdWeight = document.getElementById('lcdWeight');
+  const lcdStatusPill = document.getElementById('lcdStatusPill');
+  const lcdDistance = document.getElementById('lcdDistance');
+  const lcdDistState = document.getElementById('lcdDistState');
+  const ultrasonicBeam = document.getElementById('ultrasonicBeam');
+  const fallingGrains = document.getElementById('fallingGrains');
+  const feedMound = document.getElementById('feedMound');
+
+  const feedSackActor = document.getElementById('feedSackActor');
+  const cowActorBtn = document.getElementById('cowActorBtn');
+  const resetSimBtn = document.getElementById('resetSimBtn');
+
+  const storageBadge = document.getElementById('storageBadge');
+  const storageBadgeText = document.getElementById('storageBadgeText');
+  const metricPeso = document.getElementById('metricPeso');
+  const metricDist = document.getElementById('metricDist');
+  const metricPct = document.getElementById('metricPct');
+  const metricEvent = document.getElementById('metricEvent');
+
+  const chartLinePath = document.getElementById('chartLinePath');
+  const chartAreaPath = document.getElementById('chartAreaPath');
+  const chartDotsGroup = document.getElementById('chartDotsGroup');
+  const chartHeadDot = document.getElementById('chartHeadDot');
+  const chartHeadHalo = document.getElementById('chartHeadHalo');
+  const gradStopTop = document.getElementById('gradStopTop');
+  const gradStopBot = document.getElementById('gradStopBot');
+
+  const X_START = 48;
+  const X_END = 496;
+  const Y_TOP = 24;
+  const Y_BOT = 192;
+  const MAX_POINTS = 10;
+
+  let currentWeight = 20;
+  let animalDistanceCm = 145;
+  let historyPoints = [28, 20];
+  let animFrameId = null;
+  let eatTimers = [];
+  let isBusy = false;
+
+  function weightToY(kg) {
+    const clamped = Math.max(0, Math.min(100, kg));
+    return Y_BOT - (clamped / 100) * (Y_BOT - Y_TOP);
+  }
+
+  function buildSmoothPath(coords) {
+    if (coords.length === 0) return '';
+    if (coords.length === 1) return `M ${coords[0].x} ${coords[0].y}`;
+    let d = `M ${coords[0].x.toFixed(1)} ${coords[0].y.toFixed(1)}`;
+    for (let i = 0; i < coords.length - 1; i++) {
+      const p0 = coords[i];
+      const p1 = coords[i + 1];
+      const midX = ((p0.x + p1.x) / 2).toFixed(1);
+      d += ` C ${midX} ${p0.y.toFixed(1)}, ${midX} ${p1.y.toFixed(1)}, ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}`;
+    }
+    return d;
+  }
+
+  function renderChart(pointsArray, activeThemeColor) {
+    const stepX = (X_END - X_START) / (MAX_POINTS - 1);
+    const coords = pointsArray.map((val, idx) => ({
+      x: X_START + idx * stepX,
+      y: weightToY(val)
+    }));
+
+    const lineD = buildSmoothPath(coords);
+    const last = coords[coords.length - 1];
+    const first = coords[0];
+    const areaD = `${lineD} L ${last.x.toFixed(1)} ${Y_BOT} L ${first.x.toFixed(1)} ${Y_BOT} Z`;
+
+    chartLinePath.setAttribute('d', lineD);
+    chartLinePath.setAttribute('stroke', activeThemeColor);
+    chartAreaPath.setAttribute('d', areaD);
+    gradStopTop.setAttribute('stop-color', activeThemeColor);
+    gradStopBot.setAttribute('stop-color', activeThemeColor);
+
+    chartHeadDot.setAttribute('cx', last.x.toFixed(1));
+    chartHeadDot.setAttribute('cy', last.y.toFixed(1));
+    chartHeadDot.setAttribute('fill', activeThemeColor);
+    chartHeadHalo.setAttribute('cx', last.x.toFixed(1));
+    chartHeadHalo.setAttribute('cy', last.y.toFixed(1));
+    chartHeadHalo.setAttribute('fill', activeThemeColor);
+
+    chartDotsGroup.innerHTML = coords.slice(0, -1).map(c =>
+      `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3.5" fill="#ffffff" stroke="${activeThemeColor}" stroke-width="2"/>`
+    ).join('');
+  }
+
+  function getThemeColorForState(kg, mode) {
+    if (mode === 'eating') return '#0284c7';
+    if (kg >= 95) return '#16a34a';
+    if (kg > 35) return '#22c55e';
+    return '#d97706';
+  }
+
+  function syncVisualReadouts(kg, mode = 'idle') {
+    const rounded = Math.round(kg * 10) / 10;
+    const pct = Math.round(rounded);
+    const distRounded = Math.round(animalDistanceCm * 10) / 10;
+
+    const formattedKg = rounded.toFixed(1).replace('.', ',') + ' kg';
+    const formattedDist = distRounded.toFixed(1).replace('.', ',') + ' cm';
+    const color = getThemeColorForState(rounded, mode);
+
+    lcdWeight.textContent = formattedKg;
+    lcdDistance.textContent = formattedDist;
+    feedMound.style.height = `${Math.max(8, pct)}%`;
+
+    const beamPct = Math.round(18 + ((distRounded - 18) / (145 - 18)) * 66);
+    ultrasonicBeam.style.width = `${Math.max(16, Math.min(86, beamPct))}%`;
+    ultrasonicBeam.setAttribute('data-dist', formattedDist);
+
+    metricPeso.textContent = formattedKg;
+    metricDist.textContent = formattedDist;
+    metricPct.textContent = `${pct}%`;
+
+    scaleMachine.classList.remove('full-state', 'eating-state');
+    storageBadge.classList.remove('full', 'eating');
+
+    if (mode === 'eating') {
+      scaleMachine.classList.add('eating-state');
+      storageBadge.classList.add('eating');
+      lcdStatusPill.textContent = `Consumindo • ${pct}%`;
+      lcdDistState.textContent = 'Animal no cocho!';
+      storageBadgeText.textContent = `Vaca no Cocho (${pct}%)`;
+      metricEvent.textContent = 'No cocho';
+      metricEvent.style.color = '#0284c7';
+    } else if (pct >= 95) {
+      scaleMachine.classList.add('full-state');
+      storageBadge.classList.add('full');
+      lcdStatusPill.textContent = 'Armazenamento Cheio';
+      lcdDistState.textContent = 'Animal afastado';
+      storageBadgeText.textContent = 'Armazenamento Cheio (100%)';
+      metricEvent.textContent = 'Afastado';
+      metricEvent.style.color = '#64748b';
+    } else {
+      lcdStatusPill.textContent = `Nível Baixo • ${pct}%`;
+      lcdDistState.textContent = 'Animal afastado';
+      storageBadgeText.textContent = `Repor Ração (${pct}%)`;
+      metricEvent.textContent = 'Afastado';
+      metricEvent.style.color = '#64748b';
+    }
+
+    cowActorBtn.disabled = rounded <= 22 || isBusy;
+    renderChart(historyPoints, color);
+  }
+
+  function pushPointAndAnimate(targetKg, targetDistCm, durationMs, mode, onComplete) {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    const startKg = currentWeight;
+    const startDist = animalDistanceCm;
+    if (historyPoints.length >= MAX_POINTS) {
+      historyPoints.shift();
+    }
+    historyPoints.push(startKg);
+    const pointIndex = historyPoints.length - 1;
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / durationMs);
+      const ease = 1 - Math.pow(1 - t, 3);
+      currentWeight = startKg + (targetKg - startKg) * ease;
+      animalDistanceCm = startDist + (targetDistCm - startDist) * ease;
+      historyPoints[pointIndex] = currentWeight;
+      syncVisualReadouts(currentWeight, mode);
+
+      if (t < 1) {
+        animFrameId = requestAnimationFrame(step);
+      } else {
+        currentWeight = targetKg;
+        animalDistanceCm = targetDistCm;
+        historyPoints[pointIndex] = targetKg;
+        syncVisualReadouts(currentWeight, mode);
+        if (onComplete) onComplete();
+      }
+    }
+    animFrameId = requestAnimationFrame(step);
+  }
+
+  function putFeedOnScale() {
+    if (isBusy) return;
+    if (currentWeight >= 98) {
+      showToast('Armazenamento já está cheio (100,0 kg)!');
+      return;
+    }
+    isBusy = true;
+    cowActorBtn.disabled = true;
+    feedSackActor.classList.add('pouring');
+    fallingGrains.classList.add('active');
+    scaleMachine.classList.add('pressed');
+
+    setTimeout(() => scaleMachine.classList.remove('pressed'), 320);
+
+    pushPointAndAnimate(100, 145, 820, 'filling', () => {
+      feedSackActor.classList.remove('pouring');
+      fallingGrains.classList.remove('active');
+      isBusy = false;
+      syncVisualReadouts(100, 'idle');
+      showToast('Armazenamento Cheio (100,0 kg)! Clique na vaca para ela se aproximar do cocho.');
+    });
+  }
+
+  function simulateCowEating() {
+    if (isBusy) return;
+    if (currentWeight <= 22) {
+      showToast('Cocho baixo! Coloque ração na balança primeiro.');
+      return;
+    }
+    isBusy = true;
+    cowActorBtn.disabled = true;
+    cowActorBtn.classList.add('eating');
+
+    const target1 = Math.max(20, Math.round(currentWeight * 0.68));
+    const target2 = Math.max(20, Math.round(currentWeight * 0.42));
+    const target3 = 20;
+
+    pushPointAndAnimate(target1, 18, 520, 'eating', () => {
+      eatTimers.push(setTimeout(() => {
+        pushPointAndAnimate(target2, 18, 520, 'eating', () => {
+          eatTimers.push(setTimeout(() => {
+            pushPointAndAnimate(target3, 145, 580, 'eating', () => {
+              cowActorBtn.classList.remove('eating');
+              isBusy = false;
+              syncVisualReadouts(target3, 'idle');
+              showToast('A vaca comeu no cocho (18,0 cm) e se afastou (145,0 cm).');
+            });
+          }, 160));
+        });
+      }, 160));
+    });
+  }
+
+  function resetSimulation() {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    eatTimers.forEach(t => clearTimeout(t));
+    eatTimers = [];
+    isBusy = false;
+    currentWeight = 20;
+    animalDistanceCm = 145;
+    historyPoints = [28, 20];
+    feedSackActor.classList.remove('pouring');
+    fallingGrains.classList.remove('active');
+    cowActorBtn.classList.remove('eating');
+    feedSackActor.style.transform = '';
+    syncVisualReadouts(20, 'idle');
+  }
+
+  // Interação de Arrastar e Soltar (Pointer Events) + Clique/Teclado no Saco de Ração
+  let isDragging = false;
+  let movedEnough = false;
+  let startX = 0, startY = 0;
+
+  feedSackActor.addEventListener('pointerdown', e => {
+    if (isBusy) return;
+    isDragging = true;
+    movedEnough = false;
+    feedSackActor.classList.add('dragging');
+    feedSackActor.setPointerCapture(e.pointerId);
+    startX = e.clientX;
+    startY = e.clientY;
+  });
+
+  feedSackActor.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.hypot(dx, dy) > 6) movedEnough = true;
+    const tilt = Math.max(-18, Math.min(18, dx * 0.08));
+    feedSackActor.style.transform = `translate(${dx}px, ${dy}px) rotate(${tilt}deg) scale(1.06)`;
+
+    const sackRect = feedSackActor.getBoundingClientRect();
+    const scaleRect = scaleMachine.getBoundingClientRect();
+    const overlap = !(
+      sackRect.right < scaleRect.left ||
+      sackRect.left > scaleRect.right ||
+      sackRect.bottom < scaleRect.top ||
+      sackRect.top > scaleRect.bottom
+    );
+    scaleMachine.classList.toggle('drag-over', overlap);
+  });
+
+  function finishSackDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    feedSackActor.classList.remove('dragging');
+    const wasOver = scaleMachine.classList.contains('drag-over');
+    scaleMachine.classList.remove('drag-over');
+
+    feedSackActor.style.transition = 'transform 0.45s var(--ease-spring)';
+    feedSackActor.style.transform = 'translate(0px, 0px)';
+
+    if (wasOver || !movedEnough) {
+      putFeedOnScale();
+    }
+  }
+
+  feedSackActor.addEventListener('pointerup', finishSackDrag);
+  feedSackActor.addEventListener('pointercancel', finishSackDrag);
+  feedSackActor.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      putFeedOnScale();
+    }
+  });
+
+  cowActorBtn.addEventListener('click', simulateCowEating);
+  resetSimBtn.addEventListener('click', resetSimulation);
+
+  syncVisualReadouts(20, 'idle');
+})();
+</script>
+</body>
+</html>
